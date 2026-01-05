@@ -92,13 +92,14 @@
     <div class="heart"></div>
     <h1>Sude</h1>
 
+    
     <p>
         Seni çok iyi tanıyorum ve ayrıldıkdan hemen sonra onlarca kız eklememin
         senin gözünde beni bitirdiğini biliyorum.  O gece son kez konuşurkende
         ben flörtöz bi insanım  senden öncede öyleydim sen gidince o halime geri döndüm
         ayrıldığımız için başkalarına istek atmam normal demem senin için bana karşı herşeyi bitirdi.
     </p>
-
+    
     <p>
         Ama o gece sana söylemediğim bişey vardı ,ilişkimiz boyunca geçirdiğim hergün aramızdaki
         bu belirsizlik yüzünden çok yıpranıyordum bu beni mahvediyodu hergün acaba yarın son günümüzmü
@@ -109,6 +110,8 @@
         bitmesini istedim ondan dolayıda kendimi ilişkimiz bittiği gibi başkalarına koşan çapkın
         biri gibi gösterdim.O kadar çok kızı eklerken tek amacım senin bunları görüp aramızda bi ihtimal
         bırakmamaktı çünkü ihtimal olursa belirsizlik devam edicekti ve belirsizlikden çok yorulmuştum.
+        Lütfen bunu yaptığım için benide anla ilişki boyunca o kadar çok yıprandımki sude artık yıpranmakdan
+        yoruldum ve böyle bişey yaparak kendimi korumak istedim.
     </p>
 
     <p>
@@ -142,7 +145,7 @@
        vermen gereken bişey yapmadım yapmıycağımda benleyken kendinden taviz vermene gerek yok sana asla böyle bişey yaşatmam.
     </p>
 
-    <p>
+     <p>
         Gerçekden çok yanlış bir zamandayız ve olmuyo yürümüyo bunun bende farkıdayım ve aslında gitmekde haklıydın ikimizde sadece
         üzülüyoduk ve yıpranıyoduk.Eğer doğru zamanda olsak ikimizin çok mutlu olucağına inanıyorum ve bu yüzden 22 haziran günü Ayt 
         bittiği gibi yani herşey bitince herşey düzelince sana 2. kere denemek için yazıcam sen beni beklemek zorunda değilsin
@@ -156,8 +159,6 @@
         denemeye çalışması ikimizde hiçbişey kaybettirmez.Kendine iyi bak sevgilim ne zaman bana ihtiyacın olursa bana gelebilisin
         seni hep sevicem.
     </p>
-
-    
 
     <video 
         id="video"
@@ -176,7 +177,7 @@
 
     <audio id="music" src="music.mp3"></audio>
 
-    <button onclick="playMusic()">
+    <button>
         Okuduğun için teşekkür ederim
     </button>
 
@@ -184,16 +185,29 @@
 </div>
 
 <script>
-    function playMusic() {
-        const music = document.getElementById("music");
-        const video = document.getElementById("video");
+    const video = document.getElementById("video");
+    const music = document.getElementById("music");
 
-        video.pause();
-        music.play();
+    let videoStarted = false;
+    let musicStarted = false;
 
-        alert("Seni her şeyden çok seviyorum");
+    // Video ilk kez oynatıldı mı
+    video.addEventListener("play", () => {
+        videoStarted = true;
+    });
+
+    // Video DURUNCA veya BİTİNCE müzik başlasın
+    function startMusicIfNeeded() {
+        if (videoStarted && !musicStarted) {
+            music.play();
+            musicStarted = true;
+        }
     }
+
+    video.addEventListener("pause", startMusicIfNeeded);
+    video.addEventListener("ended", startMusicIfNeeded);
 </script>
 
 </body>
 </html>
+
